@@ -14,6 +14,7 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     accessToken => {
+      // Testing - confirms response
       console.log(accessToken);
     }
   )
@@ -27,6 +28,9 @@ app.get(
     scope: ['profile', 'email']
   })
 );
+
+// Route handler for google response with user code
+app.get('/auth/google/callback', passport.authenticate('google'));
 
 app.listen(PORT, function() {
   console.log(`Express server has started on port ${PORT}...`);
