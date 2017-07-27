@@ -1,3 +1,4 @@
 /node_modules/
 config/client_id.json
 config/keys.js
+config/db.info
