@@ -3,10 +3,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 // Include keys
 const keys = require("./config/keys");
-// Include passport file
-require("./services/passport.js");
 // Include user model
 require("./models/User");
+// Include passport file
+require("./services/passport.js");
 // Connect to mLab instance
 mongoose.connect(keys.mongoURI);
 // Instantiate app
