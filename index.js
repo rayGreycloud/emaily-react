@@ -1,39 +1,14 @@
 const express = require("express");
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const keys = require("./config/keys");
+// Include passport file
+require("./services/passport.js");
+// Include auth routes
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
+
+authRoutes(app);
+
 const PORT = process.env.PORT || 5000;
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: keys.googleClientID,
-      clientSecret: keys.googleClientSecret,
-      callbackURL: "/auth/google/callback"
-    },
-    (accessToken, refreshToken, profile, done) => {
-      // Testing - confirms response
-      console.log('access token: ', accessToken);
-      console.log('refresh token: ', refreshToken);
-      console.log('profile: ', profile);
-    }
-  )
-);
-
-app.get(
-  '/auth/google',
-  // Call authenticate with GoogleStrategy
-  passport.authenticate('google', {
-    // Options object - scope of request about user's account
-    scope: ['profile', 'email']
-  })
-);
-
-// Route handler for google response with user code
-app.get('/auth/google/callback', passport.authenticate('google'));
-
 app.listen(PORT, function() {
   console.log(`Express server has started on port ${PORT}...`);
 });
