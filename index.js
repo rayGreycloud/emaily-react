@@ -19,6 +19,15 @@ passport.use(
   )
 );
 
+app.get(
+  '/auth/google',
+  // Call authenticate with GoogleStrategy
+  passport.authenticate('google', {
+    // Options object - scope of request about user's account
+    scope: ['profile', 'email']
+  })
+);
+
 app.listen(PORT, function() {
   console.log(`Express server has started on port ${PORT}...`);
 });
