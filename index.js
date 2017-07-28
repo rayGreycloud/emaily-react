@@ -1,6 +1,8 @@
 // Include dependencies
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
 // Include keys
 const keys = require("./config/keys");
 // Include user model
@@ -11,6 +13,17 @@ require("./services/passport.js");
 mongoose.connect(keys.mongoURI);
 // Instantiate app
 const app = express();
+
+// Cookies
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    keys: [keys.cookieKey]
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Call authRoutes with app
 // Skip variable assignment - DRY
