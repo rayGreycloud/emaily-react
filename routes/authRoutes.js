@@ -12,4 +12,9 @@ module.exports = app => {
 
   // Route handler for google response with user code
   app.get("/auth/google/callback", passport.authenticate("google"));
+
+  //
+  app.get("/api/current_user", (req, res) => {
+    res.send(req.user);
+  });
 };
