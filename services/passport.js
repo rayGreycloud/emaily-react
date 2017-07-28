@@ -9,8 +9,21 @@ const keys = require("../config/keys");
 // Fetch user model class
 const User = mongoose.model("users");
 
-// Set up GoogleStrategy
+// Serialize user
+passport.serializeUser((user, done) => {
+  // user.id is mongo record _id, not user.googleId
+  done(null, user.id);
+});
+
+// Deserialize user - id = user.id
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
+
 passport.use(
+  // Set up GoogleStrategy
   new GoogleStrategy(
     {
       clientID: keys.googleClientID,
@@ -18,14 +31,15 @@ passport.use(
       callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {
+      // Look for user in db
       User.findOne({
         googleId: profile.id
       }).then(existingUser => {
         if (existingUser) {
-          // User already exists
+          // If user already exists, return user
           done(null, existingUser);
         } else {
-          // Take model instance and save to db
+          // If not, take model instance and save to db
           new User({ googleId: profile.id })
             .save()
             .then(user => done(null, user));
