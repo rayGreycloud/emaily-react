@@ -31,21 +31,20 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       // Look for user in db
-      User.findOne({
+      const existingUser = await User.findOne({
         googleId: profile.id
-      }).then(existingUser => {
-        if (existingUser) {
-          // If user already exists, return user
-          done(null, existingUser);
-        } else {
-          // If not, take model instance and save to db
-          new User({ googleId: profile.id })
-            .save()
-            .then(user => done(null, user));
-        }
       });
+
+      if (existingUser) {
+        // If user already exists, return user
+        done(null, existingUser);
+      } else {
+        // If not, take model instance and save to db
+        const user = await new User({ googleId: profile.id }).save();
+        done(null, user);
+      }
     }
   )
 );
