@@ -23,7 +23,6 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(
-  // Set up GoogleStrategy
   new GoogleStrategy(
     {
       clientID: keys.googleClientID,
@@ -32,19 +31,16 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
-      // Look for user in db
       const existingUser = await User.findOne({
         googleId: profile.id
       });
 
       if (existingUser) {
-        // If user already exists, return user
-        done(null, existingUser);
-      } else {
-        // If not, take model instance and save to db
-        const user = await new User({ googleId: profile.id }).save();
-        done(null, user);
+        return done(null, existingUser);
       }
+
+      const user = await new User({ googleId: profile.id }).save();
+      done(null, user);
     }
   )
 );
