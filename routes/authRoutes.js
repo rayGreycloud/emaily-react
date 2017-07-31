@@ -10,8 +10,14 @@ module.exports = app => {
     })
   );
 
-  // Route handler for google response with user code
-  app.get("/auth/google/callback", passport.authenticate("google"));
+  // Authenticate then redirect to dashboard
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      res.redirect("/surveys");
+    }
+  );
 
   // Route handler to log out
   app.get("/api/logout", (req, res) => {
