@@ -16,7 +16,3 @@ ReactDOM.render(
   </Provider>,
   document.querySelector("#root")
 );
-
-// Test stripe key
-console.log("STRIPE KEY IS ", process.env.REACT_APP_STRIPE_KEY);
-console.log("Our environment is ", process.env.NODE_ENV);
