@@ -23,7 +23,7 @@ module.exports = app => {
   app.get("/api/logout", (req, res) => {
     // Built-in passport method
     req.logout();
-    res.send(req.user);
+    res.redirect("/");
   });
 
   // Route handler to get user from cookie
