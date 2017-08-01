@@ -15,6 +15,8 @@ mongoose.connect(keys.mongoURI);
 // Instantiate app
 const app = express();
 
+// middlewares
+app.use(bodyParser.json());
 // Cookies
 app.use(
   cookieSession({
@@ -23,8 +25,6 @@ app.use(
   })
 );
 
-// Other middlewares
-app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
