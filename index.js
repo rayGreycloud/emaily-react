@@ -25,9 +25,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Call authRoutes with app
+// Call route functions with app
 // Skip variable assignment - DRY
 require("./routes/authRoutes")(app);
+require("./routes/billingRoutes")(app);
 
 // Set port for heroku or local
 const PORT = process.env.PORT || 5000;
