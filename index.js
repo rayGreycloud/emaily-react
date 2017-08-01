@@ -6,8 +6,9 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 // Include keys
 const keys = require('./config/keys');
-// Include user model
+// Include models
 require('./models/User');
+require('./models/Survey');
 // Include passport file
 require('./services/passport.js');
 // Connect to mLab instance
