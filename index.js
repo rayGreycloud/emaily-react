@@ -33,6 +33,7 @@ app.use(passport.session());
 // Skip variable assignment - DRY
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Express serve production assets
