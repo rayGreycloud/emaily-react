@@ -41,7 +41,7 @@ class Mailer extends helper.Mail {
     this.addTrackingSettings(trackingSettings);
   }
   // Add formatted addresses to email
-  addRecipients(recipients) {
+  addRecipients() {
     // define helper
     const personalize = new helper.Personalization();
     // iterate over recipient list
@@ -62,7 +62,7 @@ class Mailer extends helper.Mail {
       body: this.toJSON()
     });
     // Send request
-    const response = this.sgApi.API(request);
+    const response = await this.sgApi.API(request);
     return response;
   }
 }
