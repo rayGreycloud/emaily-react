@@ -38,6 +38,18 @@ class Mailer extends helper.Mail {
     // Add setting
     this.addTrackingSettings(trackingSettings);
   }
+  // Add formatted addresses to email
+  addRecipients(recipients) {
+    // define helper
+    const personalize = new helper.Personalization();
+    // iterate over recipient list
+    this.recipients.forEach(recipient => {
+      // Add recipient to personalize object
+      personalize.addTo(recipient);
+    });
+    // Add personalize object with recipients to email
+    this.addPersonalization(personalize);
+  }
 }
 
 module.exports = Mailer;
