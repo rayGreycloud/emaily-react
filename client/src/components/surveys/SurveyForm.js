@@ -45,7 +45,19 @@ class SurveyForm extends Component {
   }
 }
 
+// Validate input values
+function validate(values) {
+  const errors = {};
+
+  if (!values.title) {
+    errors.title = 'You must provide a title';
+  }
+
+  return errors;
+}
+
 // Wire up reduxForm to our form
 export default reduxForm({
+  validate,
   form: 'surveyForm'
 })(SurveyForm);
