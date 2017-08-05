@@ -1,5 +1,5 @@
 // SurveyFormReview shows users form inputs to review and confirm
-import React, { Component } from 'react';
+import React from 'react';
 
 const SurveyFormReview = ({ onCancel }) => {
   return (
