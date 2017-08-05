@@ -45,12 +45,12 @@ function validate(values) {
   const errors = {};
 
   // Validate emails first
-  errors.emails = validateEmails(values.emails || '');
+  errors.recipients = validateEmails(values.recipients || '');
 
   // Iterate over fields, pull off name prop
   _.each(formFields, ({ label, name }) => {
     // Check field, add error if empty
-    if (!values[name] && values[name] === 'emails') {
+    if (!values[name] && values[name] === 'recipients') {
       errors[name] = 'You must provide at least one recipient';
     } else if (!values[name]) {
       errors[name] = `You must provide a ${label}`;
