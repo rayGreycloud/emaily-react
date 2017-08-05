@@ -1,14 +1,15 @@
+// SurveyFormReview shows users form inputs to review and confirm
 import React, { Component } from 'react';
 
-class SurveyFormReview extends Component {
-  render() {
-    return (
-      <div>
-        <h3>Survey Form Review</h3>
-        <h5>Please confirm your entries</h5>
-      </div>
-    );
-  }
-}
+const SurveyFormReview = ({ onCancel }) => {
+  return (
+    <div>
+      <h5>Please confirm your entries</h5>
+      <button className="yellow darken-3 btn-flat" onClick={onCancel}>
+        Back
+      </button>
+    </div>
+  );
+};
 
 export default SurveyFormReview;
