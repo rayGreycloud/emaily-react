@@ -16,8 +16,10 @@ export const handleToken = token => async dispatch => {
 };
 
 // Handle survey form submit
-export const submitSurvey = values => {
-  return { type: 'submit_survey' };
+export const submitSurvey = values => async dispatch => {
+  const res = await axios.post('/api/surveys', values);
+  // Dispatch new user object
+  dispatch({ type: FETCH_USER, payload: res.data });
 };
 
 // export const fetchUser = () => {
