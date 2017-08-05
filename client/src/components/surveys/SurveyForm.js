@@ -5,17 +5,11 @@ import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import SurveyField from './SurveyField';
 import validateEmails from '../../utils/validateEmails';
-
-const FIELDS = [
-  { label: 'Survey Title', name: 'title' },
-  { label: 'Subject Line', name: 'subject' },
-  { label: 'Email Body', name: 'body' },
-  { label: 'Recipient List', name: 'emails' }
-];
+import formFields from './formFields';
 
 class SurveyForm extends Component {
   renderFields() {
-    return _.map(FIELDS, ({ label, name }) => {
+    return _.map(formFields, ({ label, name }) => {
       return (
         <Field
           component={SurveyField}
@@ -54,7 +48,7 @@ function validate(values) {
   errors.emails = validateEmails(values.emails || '');
 
   // Iterate over fields, pull off name prop
-  _.each(FIELDS, ({ label, name }) => {
+  _.each(formFields, ({ label, name }) => {
     // Check field, add error if empty
     if (!values[name] && values[name] === 'emails') {
       errors[name] = 'You must provide at least one recipient';
@@ -69,5 +63,6 @@ function validate(values) {
 // Wire up reduxForm to our form
 export default reduxForm({
   validate,
-  form: 'surveyForm'
+  form: 'surveyForm',
+  destroyOnUnmount: false
 })(SurveyForm);
