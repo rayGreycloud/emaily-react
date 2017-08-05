@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_USER } from './types';
 
-// Refactor using arrow and async/await
+// Fetch user
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
   // Only need data prop
@@ -13,6 +13,11 @@ export const handleToken = token => async dispatch => {
   const res = await axios.post('/api/stripe', token);
 
   dispatch({ type: FETCH_USER, payload: res.data });
+};
+
+// Handle survey form submit
+export const submitSurvey = values => {
+  return { type: 'submit_survey' };
 };
 
 // export const fetchUser = () => {
