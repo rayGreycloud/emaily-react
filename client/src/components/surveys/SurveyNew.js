@@ -12,12 +12,25 @@ class SurveyNew extends Component {
   // }
 
   // Setting state with babel plugin
-  state = { formReview: false };
+  state = { showFormReview: false };
+
+  renderContent() {
+    // Check flag and show review if true
+    if (this.state.showFormReview) {
+      return <SurveyFormReview />;
+    }
+    // else show form
+    return (
+      <SurveyForm
+        onSurveySubmit={() => this.setState({ showFormReview: true })}
+      />
+    );
+  }
 
   render() {
     return (
       <div>
-        <SurveyForm />
+        {this.renderContent()}
       </div>
     );
   }
