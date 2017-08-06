@@ -9,6 +9,8 @@
 #### Mongoose.js
 #### Google OAuth
 ### Outside Services Used:
+#### mLab
+#### Stripe
 #### Heroku
 #### SendGrid
 #### GitHub
