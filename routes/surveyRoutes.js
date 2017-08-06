@@ -20,7 +20,7 @@ module.exports = app => {
     // set path pattern wanted
     const p = new Path('/api/surveys/:surveyId/:choice');
 
-    const events = _.chain(req.body)
+    _.chain(req.body)
       .map(({ email, url }) => {
         // pull out url and check against pathname
         const match = p.test(new URL(url).pathname);
@@ -33,9 +33,22 @@ module.exports = app => {
       .compact()
       // Remove duplicates
       .uniqBy('email', 'surveyId')
+      // Iterate and run query
+      .each(({ surveyId, email, choice }) => {
+        Survey.updateOne(
+          {
+            _id: surveyId,
+            recipients: {
+              $elemMatch: { email: email, responded: false }
+            }
+          },
+          {
+            $inc: { [choice]: 1 },
+            $set: { 'recipients.$.responded': true }
+          }
+        ).exec();
+      })
       .value();
-
-    console.log(events);
 
     res.send({});
   });

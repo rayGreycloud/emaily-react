@@ -1,4 +1,5 @@
 /node_modules/
 /config/secret
 /config/dev.js
+/routes/surveyUpdate.js
 .env.*
