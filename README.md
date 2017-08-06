@@ -8,3 +8,8 @@
 #### MongoDB
 #### Mongoose.js
 #### Google OAuth
+### Outside Services Used:
+#### Heroku
+#### SendGrid
+#### GitHub
+#### LocalTunnel (dev)
