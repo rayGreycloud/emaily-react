@@ -15,3 +15,11 @@
 #### SendGrid
 #### GitHub
 #### LocalTunnel (dev)
+
+### Feature Todos:
+#### Front: Display lastResponded date
+#### Front: Display chart for yes/no counts
+#### Back: Allow users to delete surveys
+#### Front/Back: Allow users to specify 'from' field on survey emails
+#### Front: Allow client side sorting of surveys
+#### Front/Back: Allow surveys to be created in draft mode
