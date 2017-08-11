@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { FETCH_USER } from './types';
 import { FETCH_SURVEYS } from './types';
+import { DELETE_SURVEY } from './types';
 
 // Fetch user
 export const fetchUser = () => async dispatch => {
@@ -30,6 +31,12 @@ export const fetchSurveys = () => async dispatch => {
   const res = await axios.get('/api/surveys');
   // Payload is array of surveys
   dispatch({ type: FETCH_SURVEYS, payload: res.data });
+};
+
+// Delete Survey
+export const deleteSurvey = (id) => async dispatch => {
+  const res = await axios.delete(`/api/surveys/${id}`);
+  dispatch({ type: DELETE_SURVEY, payload: res.data });
 };
 
 // ES5 syntax
