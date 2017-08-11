@@ -17,14 +17,14 @@ class SurveyList extends Component {
             <span className="card-title">
               {survey.title}
             </span>
-            <p>
+            <div>
               {survey.body}
               <p className='right'>
                 Sent On:  {new Date(survey.dateSent).toLocaleString('en-US')}
                 <br/>
                 Last Response:  {new Date(survey.lastResponded).toLocaleString('en-US')}
               </p>
-            </p>
+            </div>
           </div>
           <div className="card-action">
             <a href="">
