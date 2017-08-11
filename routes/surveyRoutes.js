@@ -90,4 +90,26 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
+
+  app.delete('/api/surveys/:surveyId', requireLogin, async (req, res) => {
+    try {
+      const survey = await Survey.findOneAndRemove({
+        _id: surveyId,
+        _user: req.user.id
+      });
+
+      if (!survey) {
+        return res.status(404).send();
+      }
+
+      const response = {
+        message: "Survey successfully deleted",
+        surveyId: survey._id
+      };
+
+      res.send(response);
+    } catch (e) {
+        res.status(400).send();
+    };
+  });
 };
