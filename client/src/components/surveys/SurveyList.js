@@ -33,6 +33,14 @@ class SurveyList extends Component {
             <a href="">
               No: {survey.no}
             </a>
+
+            <button
+              className="red lighten-1  white-text btn-flat"
+              onClick={() => console.log(survey._id)}
+            >
+              Delete
+              <i className="material-icons right">delete</i>
+            </button>
           </div>
         </div>
       );
