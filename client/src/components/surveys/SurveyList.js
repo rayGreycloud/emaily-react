@@ -19,9 +19,11 @@ class SurveyList extends Component {
             </span>
             <p>
               {survey.body}
-            </p>
-            <p className="right">
-              Sent On: {new Date(survey.dateSent).toLocaleDateString()}
+              <p className='right'>
+                Sent On:  {new Date(survey.dateSent).toLocaleString('en-US')}
+                <br/>
+                Last Response:  {new Date(survey.lastResponded).toLocaleString('en-US')}
+              </p>
             </p>
           </div>
           <div className="card-action">
