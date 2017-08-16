@@ -92,10 +92,11 @@ module.exports = app => {
   });
 
   app.delete('/api/surveys/:surveyId', requireLogin, async (req, res) => {
+    console.log(req);
     try {
+
       const survey = await Survey.findOneAndRemove({
-        _id: surveyId,
-        _user: req.user.id
+        _id: req.body.params.surveyId
       });
 
       if (!survey) {
